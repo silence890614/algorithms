@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>隨機美食抽選器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            margin: 20px 0;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+            transform: scale(1.05);
+        }
+
+        #result {
+            font-size: 28px;
+            min-height: 60px;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            transition: all 0.5s;
+        }
+
+        .emoji {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>今天吃什麼？隨機抽選！</h1>
+        <button onclick="randomPick()">點我抽選</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const options = [
+            {name: "壽司", emoji: "🍣"},
+            {name: "火鍋", emoji: "🍲"},
+            {name: "速食", emoji: "🍔"},
+            {name: "熱炒", emoji: "🍳"},
+            {name: "自助餐", emoji: "🥘"},
+            {name: "牛肉麵", emoji: "🍜"}
+        ];
+
+        function randomPick() {
+            const resultDiv = document.getElementById("result");
+            // 添加抽選動畫
+            resultDiv.style.animation = 'bounce 0.3s ease 2';
+            
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * options.length);
+                const selected = options[randomIndex];
+                resultDiv.innerHTML = `
+                    <span class="emoji">${selected.emoji}</span>
+                    <span>今日推薦：${selected.name}！</span>
+                `;
+                // 移除動畫以便下次使用
+                resultDiv.style.animation = '';
+            }, 600);
+        }
+    </script>
+</body>
+</html>
